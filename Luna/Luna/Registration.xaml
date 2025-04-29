@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Luna.Registration"
+             Title="Registration"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Background>
+        <LinearGradientBrush>
+           <GradientStop Color="#2C2C54" Offset="0.1"/>  <!-- Dark Blue/Purple -->
+           <GradientStop Color="#1B1B2F" Offset="1.0"/>  <!-- Deep Dark Blue -->
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+    <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+        <!-- Logo -->
+        <Image x:Name="L" Source="lunalogo.png" WidthRequest="130" HeightRequest="130"
+               HorizontalOptions="Center" Margin="0,15,0,10"
+               Opacity="1"/>
+
+        <Label Text="Create an Account" FontSize="26" FontAttributes="Bold" 
+               HorizontalOptions="Center" TextColor="White" />
+
+        <!-- Input Fields -->
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="firstnameEntry" Text="{Binding acc.Fname}" Placeholder="First Name" FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="middlenameEntry" Text="{Binding acc.Mname}" Placeholder="Middle Name" FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="lastnameEntry" Text="{Binding acc.Lname}" Placeholder="Last Name" FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="ageEntry" Text="{Binding acc.Age}" Placeholder="Age" FontSize="16" TextColor="Black" Keyboard="Numeric"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="addressEntry" Text="{Binding acc.address}" Placeholder="Address" FontSize="16" TextColor="Black" Keyboard="Text"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="contactnumberEntry" Text="{Binding acc.contactNo}" Placeholder="Contact Number" FontSize="16" TextColor="Black" Keyboard="Numeric"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="emailEntry" Text="{Binding acc.user}" Placeholder="Email" Keyboard="Email" FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="passwordEntry" Text="{Binding acc.pass}" Placeholder="Password" FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="confirmPasswordEntry" Text="{Binding acc.confirmPass}" Placeholder="Confirm Password" FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <!-- Buttons -->
+        <Button Text="Sign Up" BackgroundColor="White" TextColor="#2575FC"
+                FontSize="16" CornerRadius="20" HeightRequest="45"
+                Command="{Binding register}" CommandParameter="{Binding acc}"/>
+
+        <Label Text="Already have an account?" FontSize="14" TextColor="White"
+               HorizontalOptions="Center" Margin="0,-10,0,-12"/>
+
+        <Button Text="Back to Login" BackgroundColor="Transparent" TextColor="White"
+                FontSize="20" Clicked="OnBackToLoginClicked" FontAttributes="Bold"/>
+    </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Luna.NewPost"
+             BackgroundColor="{StaticResource BackgroundColor}"
+             NavigationPage.HasNavigationBar="False">
+
+    <!-- Reuse the same color palette -->
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="PrimaryColor">#2C2C54</Color>
+            <Color x:Key="BackgroundColor">#121212</Color>
+            <Color x:Key="TextColor">#FFFFFF</Color>
+            <Color x:Key="CardBackground">#1E1E1E</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *">
+        <!-- HEADER BAR -->
+        <Grid
+      Grid.Row="0"
+      BackgroundColor="{StaticResource PrimaryColor}"
+      Padding="12,8"
+      ColumnDefinitions="Auto, *">
+
+            <!-- Back Button -->
+            <ImageButton
+        Source="icon_back.png"
+        WidthRequest="24"
+        HeightRequest="24"
+        BackgroundColor="Transparent"
+        Command="{Binding GoBackCommand}" />
+
+            <!-- Title -->
+            <Label
+        Grid.Column="1"
+        Text="New Post"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="{StaticResource TextColor}"
+        VerticalOptions="Center"
+        HorizontalOptions="Center" />
+        </Grid>
+
+        <!-- CONTENT FORM -->
+        <ScrollView Grid.Row="1">
+            <StackLayout
+        Padding="16"
+        Spacing="16">
+
+                <!-- Post Text -->
+                <Frame
+          BackgroundColor="{StaticResource CardBackground}"
+          CornerRadius="10"
+          HasShadow="False">
+                    <Editor
+            x:Name="PostEditor"
+            Text="{Binding NewPostContent}"
+            Placeholder="What's on your mind?"
+            PlaceholderColor="{StaticResource TextColor}"
+            TextColor="{StaticResource TextColor}"
+            AutoSize="TextChanges"
+            BackgroundColor="Transparent" />
+                </Frame>
+
+                <!-- Image Preview + Picker -->
+                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto">
+
+                    <Image
+            Source="{Binding SelectedImage}"
+            Aspect="AspectFill"
+            HeightRequest="200"
+            IsVisible="{Binding IsImageSelected}" />
+
+                    <Button
+            Grid.Row="1"
+            Grid.Column="0"
+            Text="Add Image"
+            Command="{Binding PickImageCommand}"
+            BackgroundColor="{StaticResource PrimaryColor}"
+            TextColor="{StaticResource TextColor}"
+            CornerRadius="25"
+            HeightRequest="50" />
+
+                    <Button
+            Grid.Row="1"
+            Grid.Column="1"
+            Text="Remove"
+            Command="{Binding RemoveImageCommand}"
+            IsVisible="{Binding IsImageSelected}"
+            BackgroundColor="Transparent"
+            TextColor="{StaticResource TextColor}" />
+                </Grid>
+
+                <!-- Submit Button -->
+                <Button
+          Text="Post"
+          Command="{Binding SubmitPostCommand}"
+          BackgroundColor="{StaticResource PrimaryColor}"
+          TextColor="{StaticResource TextColor}"
+          CornerRadius="25"
+          HeightRequest="50" />
+
+            </StackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

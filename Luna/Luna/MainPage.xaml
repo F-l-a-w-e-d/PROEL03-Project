@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Luna.MainPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Background>
+        <LinearGradientBrush>
+            <GradientStop Color="#2C2C54" Offset="0.1"/>
+            <!-- Dark Blue/Purple -->
+            <GradientStop Color="#1B1B2F" Offset="1.0"/>
+            <!-- Deep Dark Blue -->
+        </LinearGradientBrush>
+    </ContentPage.Background>
+
+    <ScrollView>
+    <VerticalStackLayout Padding="30" Spacing="20" VerticalOptions="Center">
+        <!-- Logo -->
+        <Image x:Name="Logo" Source="lunalogo.png" WidthRequest="200" HeightRequest="200"
+            HorizontalOptions="Center" Margin="0,40,0,10"
+            Opacity="0.9"/>
+
+        <Label Text="Welcome to Luna" FontSize="28" FontAttributes="Bold" 
+            HorizontalOptions="Center" TextColor="White" />
+
+        <!-- Input Fields -->
+        <Frame Padding="12" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="emailEntry" Text="{Binding acc.user}" Placeholder="Email" Keyboard="Email" 
+                FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <Frame Padding="12" CornerRadius="10" BackgroundColor="White" HasShadow="True">
+            <Entry x:Name="passwordEntry" Text="{Binding acc.pass}" Placeholder="Password" IsPassword="True" 
+                FontSize="16" TextColor="Black"/>
+        </Frame>
+
+        <!-- Buttons -->
+        <Button Text="Login" BackgroundColor="White" TextColor="#2575FC"
+             FontSize="18" CornerRadius="25" HeightRequest="50"
+             Command="{Binding login}" CommandParameter="{Binding acc}"/>
+
+        <Label Text="Don't have an account?" FontSize="14" TextColor="White"
+            HorizontalOptions="Center"/>
+
+            <Button Text="Sign Up" BackgroundColor="Transparent" TextColor="White"
+             FontSize="16" Clicked="OnRegisterClicked"/>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
