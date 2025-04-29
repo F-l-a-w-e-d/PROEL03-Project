@@ -10,6 +10,9 @@ namespace Luna
 
             // bind to ViewModel
             BindingContext = new LoginViewModel();
+
+            // Sample comment
+            //Next Sample
         }
 
         //Transfer to registration form
