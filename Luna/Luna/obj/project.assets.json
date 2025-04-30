@@ -30797,11 +30797,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Spartan 069\\Desktop\\New folder\\Luna\\Luna\\Luna.csproj",
+      "projectUniqueName": "C:\\Users\\Spartan 069\\Documents\\GitHub\\PROEL03-Project\\Luna\\Luna\\Luna.csproj",
       "projectName": "Luna",
-      "projectPath": "C:\\Users\\Spartan 069\\Desktop\\New folder\\Luna\\Luna\\Luna.csproj",
+      "projectPath": "C:\\Users\\Spartan 069\\Documents\\GitHub\\PROEL03-Project\\Luna\\Luna\\Luna.csproj",
       "packagesPath": "C:\\Users\\Spartan 069\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Spartan 069\\Desktop\\New folder\\Luna\\Luna\\obj\\",
+      "outputPath": "C:\\Users\\Spartan 069\\Documents\\GitHub\\PROEL03-Project\\Luna\\Luna\\obj\\",
       "projectStyle": "PackageReference",
       "crossTargeting": true,
       "fallbackFolders": [

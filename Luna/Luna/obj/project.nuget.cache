@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "i8kYpXzFg28=",
+  "dgSpecHash": "3TR1+ToAMqQ=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Spartan 069\\Desktop\\New folder\\Luna\\Luna\\Luna.csproj",
+  "projectFilePath": "C:\\Users\\Spartan 069\\Documents\\GitHub\\PROEL03-Project\\Luna\\Luna\\Luna.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Spartan 069\\.nuget\\packages\\communitytoolkit.maui\\4.0.0\\communitytoolkit.maui.4.0.0.nupkg.sha512",
     "C:\\Users\\Spartan 069\\.nuget\\packages\\communitytoolkit.maui.core\\4.0.0\\communitytoolkit.maui.core.4.0.0.nupkg.sha512",
