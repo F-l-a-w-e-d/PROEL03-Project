@@ -1,0 +1,91 @@
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Rider
+.idea/
+
+# VS Code
+.vscode/
+
+# User-specific files
+*.userprefs
+*.pidb
+*.opendb
+*.VC.db
+
+# Build outputs
+/bin/
+/obj/
+/TestResults/
+/artifacts/
+
+# .NET Core
+project.lock.json
+project.fragment.lock.json
+*.dbmdl
+
+# NuGet
+*.nupkg
+# The packages folder can be ignored because of Package Restore
+**/packages/*
+# except build/, which is used as an MSBuild target.
+!**/packages/build/
+.nuget/
+
+# Xamarin/MAUI iOS builds
+**/bin/iPhone*/
+**/obj/iPhone*/
+**/bin/iPhoneSimulator*/
+**/obj/iPhoneSimulator*/
+
+# Xamarin/MAUI Android builds
+**/bin/Android*/
+**/obj/Android*/
+
+# Xamarin/MAUI Mac builds
+**/bin/MacCatalyst*/
+**/obj/MacCatalyst*/
+
+# Xamarin/MAUI Windows builds (if targeting WinUI)
+**/bin/Windows*/
+**/obj/Windows*/
+
+# Xamarin/MAUI Tizen builds
+**/bin/Tizen*/
+**/obj/Tizen*/
+
+# Coverage & profiling
+*.coverage
+*.coveragexml
+*.profdata
+*.profraw
+
+# DotCover
+*.dotCover
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# JetBrains Rider caches
+.idea/
+*.sln.iml
+
+# Compiled python (if any scripts)
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# Local secrets (if you use dotnet user-secrets)
+secrets.json
+
+# Resharper
+_ReSharper*/
+*.DotSettings.user
+
