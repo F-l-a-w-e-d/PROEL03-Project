@@ -16,6 +16,11 @@
 *.pidb
 *.opendb
 *.VC.db
+*.dll
+*.pidb
+*.cache
+*.zip
+*.flat
 
 # Build outputs
 /bin/
