@@ -89,3 +89,8 @@ secrets.json
 _ReSharper*/
 *.DotSettings.user
 
+# cover all intermediate build obj folders
+**/obj/**
+
+# cover all build bins
+**/bin/**
