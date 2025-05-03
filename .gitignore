@@ -99,3 +99,21 @@ _ReSharper*/
 
 # cover all build bins
 **/bin/**
+
+# Intermediate & final outputs
+/bin/
+/obj/
+
+# Mono/.NET binaries & caches
+*.dll
+*.pdb
+*.cache
+*.zip
+*.flat
+
+# Android packages
+*.apk
+*.apk.idsig
+
+# MAUI asset cache
+*.assets.cache
