@@ -20,12 +20,17 @@ namespace Luna.Models
         // commands
         public ICommand register { get; set; }
         public ICommand login { get; set; }
+        public ICommand backToLogin { get; set; }
+        public ICommand goToRegister { get; set; }
 
         // view model
         public LoginViewModel()
         {
             register = new Command<Account>(async (acc) => await RegisterAccount(acc));
             login = new Command<Account>(async (acc) => await loginAcc(acc));
+
+            backToLogin = new Command(() => Application.Current.MainPage = App.Services.GetRequiredService<MainPage>());
+            goToRegister = new Command(() => Application.Current.MainPage = App.Services.GetRequiredService<Registration>());
         }
 
         private async Task RegisterAccount(Account acc)
@@ -92,7 +97,8 @@ namespace Luna.Models
                 return;
             }
 
-            // check if user exists ------------------------ ** CHANGE THIS TO MOCK API IN FETCHING DATA
+            // check if user exists
+            List<Account> accounts = await MockAPI.fetchAllData<Account>("Account");
             if (accounts.Any(a => a.user == acc.user))
             {
                 await Application.Current.MainPage.DisplayAlert("Register", "Account already exists!", "OK");
@@ -104,7 +110,7 @@ namespace Luna.Models
             if (await MockAPI.insertData(acc, "Account"))
             {
                 await Application.Current.MainPage.DisplayAlert("Register", "Successfully registered!", "OK");
-                await Application.Current.MainPage.Navigation.PopAsync();
+                Application.Current.MainPage = App.Services.GetRequiredService<MainPage>();
             }
             else
             {
@@ -120,6 +126,7 @@ namespace Luna.Models
             string pass = acc.pass ?? "";
 
             // get account
+            List<Account> accounts = await MockAPI.fetchAllData<Account>("Account");
             Account account = accounts.FirstOrDefault(a => a.user == user && a.pass == pass);
 
             // restriction if account is null
@@ -131,6 +138,8 @@ namespace Luna.Models
 
             // success
             await Application.Current.MainPage.DisplayAlert("Login", "Successfully logged in! Welcome " + account.Lname, "OK");
+
+            Application.Current.MainPage = App.Services.GetRequiredService<Home>();
         }
     }
 }

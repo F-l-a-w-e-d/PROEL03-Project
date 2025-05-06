@@ -9,7 +9,7 @@ namespace Luna.Models
     public class Account
     {
         // for login
-        public int AccountId { get; set; }
+        public string AccountId { get; set; }
         public string Lname { get; set; }
         public string Mname {  get; set; }
         public string Fname {  get; set; }
