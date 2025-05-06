@@ -1,4 +1,10 @@
-﻿using Microsoft.Maui.Controls;
+﻿using CommunityToolkit.Maui.Converters;
+using Microsoft.Maui.ApplicationModel.Communication;
+using Microsoft.Maui.Controls;
+using System.Text;
+using System.Text.Json;
+using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 
 namespace Luna.Models
@@ -24,33 +30,86 @@ namespace Luna.Models
 
         private async Task RegisterAccount(Account acc)
         {
+            // a function for checking numbers on names
+            bool hasNumericName(string name)
+            {
+                for (int i = 0; i < name.Length; i++)
+                {
+                    if (int.TryParse(name[i].ToString(), out _)) return true;
+                }
+                return false;
+            }
+
+            #region ----- VALIDATIONS -----
             // check if null
             if (acc == null || string.IsNullOrWhiteSpace(acc.user) || string.IsNullOrWhiteSpace(acc.pass) ||
-                string.IsNullOrWhiteSpace(acc.Fname) || string.IsNullOrWhiteSpace(acc.Lname) || string.IsNullOrWhiteSpace(acc.Mname) || string.IsNullOrWhiteSpace(acc.address) || string.IsNullOrWhiteSpace(acc.Age.ToString()) || string.IsNullOrWhiteSpace(acc.contactNo.ToString()))
+                string.IsNullOrWhiteSpace(acc.Fname) || string.IsNullOrWhiteSpace(acc.Lname) || string.IsNullOrWhiteSpace(acc.Mname) || string.IsNullOrWhiteSpace(acc.address) || string.IsNullOrWhiteSpace(acc.BirthDate.ToString()) || string.IsNullOrWhiteSpace(acc.contactNo.ToString()))
             {
                 await Application.Current.MainPage.DisplayAlert("Register", "Please do not provide blanks. Try again.", "OK");
                 return;
             }
 
-            // check if password match
+            // NAMES - Consists numeric
+            if (hasNumericName(acc.Fname) || hasNumericName(acc.Mname) || hasNumericName(acc.Lname))
+            {
+                await Application.Current.MainPage.DisplayAlert("Register", "Please enter a valid name.", "OK");
+                return;
+            }
+
+            // BIRTH DATE - Age
+            int age = DateTime.Now.Year - acc.BirthDate.Year;
+            if (age < 13 || age > 120)
+            {
+                await Application.Current.MainPage.DisplayAlert("Register", "No age should be less than 13 or greater than 120", "OK");
+                return;
+            }
+
+            // CONTACTNO - Consists text
+            if (!long.TryParse(acc.contactNo, out _) || acc.contactNo.Length < 11)
+            {
+                await Application.Current.MainPage.DisplayAlert("Register", "Please enter a valid contact number.", "OK");
+                return;
+            }
+
+            // USER (Email) - validation
+            if (!Regex.IsMatch(acc.user, @"^[^@\s]+@[^@\s]+\.[^@\s]+$"))
+            {
+                await Application.Current.MainPage.DisplayAlert("Register", "Please enter a valid username.", "OK");
+                return;
+            }
+
+            // Password - length
+            if (acc.pass.Length < 8)
+            {
+                await Application.Current.MainPage.DisplayAlert("Register", "Password must contain 8 letters!", "OK");
+                return;
+            }
+
+            // PASSWORD - Matching confirm pass
             if (acc.pass != acc.confirmPass)
             {
                 await Application.Current.MainPage.DisplayAlert("Register", "Password do not match!", "OK");
                 return;
             }
 
-            // check if user exists
+            // check if user exists ------------------------ ** CHANGE THIS TO MOCK API IN FETCHING DATA
             if (accounts.Any(a => a.user == acc.user))
             {
                 await Application.Current.MainPage.DisplayAlert("Register", "Account already exists!", "OK");
                 return;
             }
+            #endregion
 
-            // success
-            accounts.Add(acc);
-
-            await Application.Current.MainPage.DisplayAlert("Register", "Successfully registered!", "OK");
-            await Application.Current.MainPage.Navigation.PopAsync();
+            // inserting of data
+            if (await MockAPI.insertData(acc, "Account"))
+            {
+                await Application.Current.MainPage.DisplayAlert("Register", "Successfully registered!", "OK");
+                await Application.Current.MainPage.Navigation.PopAsync();
+            }
+            else
+            {
+                await Application.Current.MainPage.DisplayAlert("Register", "Register Failed. Please try again.", "OK");
+            }
         }
 
         // login command

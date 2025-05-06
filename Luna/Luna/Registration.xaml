@@ -35,7 +35,7 @@
         </Frame>
 
         <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
-            <Entry x:Name="ageEntry" Text="{Binding acc.Age}" Placeholder="Age" FontSize="16" TextColor="Black" Keyboard="Numeric"/>
+            <Entry x:Name="ageEntry" Text="{Binding acc.BirthDate}" Placeholder="Age" FontSize="16" TextColor="Black" Keyboard="Date"/>
         </Frame>
 
         <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
@@ -43,7 +43,7 @@
         </Frame>
 
         <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
-            <Entry x:Name="contactnumberEntry" Text="{Binding acc.contactNo}" Placeholder="Contact Number" FontSize="16" TextColor="Black" Keyboard="Numeric"/>
+            <Entry x:Name="contactnumberEntry" Text="{Binding acc.contactNo}" Placeholder="Contact Number" FontSize="16" TextColor="Black" Keyboard="Text"/>
         </Frame>
 
         <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
