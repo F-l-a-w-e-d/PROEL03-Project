@@ -43,7 +43,7 @@
             HorizontalOptions="Center"/>
 
             <Button Text="Sign Up" BackgroundColor="Transparent" TextColor="White"
-             FontSize="16" Clicked="OnRegisterClicked"/>
+             FontSize="16" Command="{Binding goToRegister}"/>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

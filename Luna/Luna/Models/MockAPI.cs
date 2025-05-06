@@ -21,5 +21,18 @@ namespace Luna.Models
             var response = await _httpClient.PostAsync($"{baseURL}/{tableName}", content);
             return response.IsSuccessStatusCode;
         }
+
+        // Fetch all data on specific table
+        public static async Task<List<T>> fetchAllData<T>(string tableName) where T : class
+        {
+            var raw = await _httpClient.GetAsync($"{baseURL}/{tableName}");
+
+            if (!raw.IsSuccessStatusCode) throw new Exception($"Table name didn't exist. Ensure that {tableName} exists from the API.");
+
+            var json = await raw.Content.ReadAsStringAsync();
+            var data = JsonSerializer.Deserialize<List<T>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
+
+            return data;
+        }
     }
 }
