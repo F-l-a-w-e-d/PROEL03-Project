@@ -97,6 +97,9 @@ namespace Luna.Models
                 return;
             }
 
+            // check if user has internet connection
+            if (await MockAPI.hasAnInternetConnection() == false) { return; }
+
             // check if user exists
             List<Account> accounts = await MockAPI.fetchAllData<Account>("Account");
             if (accounts.Any(a => a.user == acc.user))
@@ -124,6 +127,9 @@ namespace Luna.Models
             // check if empty
             string user = acc.user ?? "";
             string pass = acc.pass ?? "";
+
+            // check if user has internet connection
+            if (await MockAPI.hasAnInternetConnection() == false) { return; }
 
             // get account
             List<Account> accounts = await MockAPI.fetchAllData<Account>("Account");
