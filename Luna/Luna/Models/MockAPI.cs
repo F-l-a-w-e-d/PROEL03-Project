@@ -13,6 +13,7 @@ namespace Luna.Models
         static readonly string baseURL = "https://681934661ac115563504382f.mockapi.io/PROEL03/";
         static HttpClient _httpClient = new HttpClient();
 
+        // check if user has internet
         public static async Task<bool> hasAnInternetConnection()
         {
             var current = Connectivity.NetworkAccess;
