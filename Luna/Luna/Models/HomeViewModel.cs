@@ -8,8 +8,10 @@ namespace Luna.Models
 {
     class HomeViewModel
     {
+        // Get Posts
         public List<Post> Posts { get; } = new List<Post>();
 
+        // Static data
         public HomeViewModel()
         {
             Posts.Add(new Post

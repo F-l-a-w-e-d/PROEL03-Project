@@ -20,6 +20,7 @@ namespace Luna.Models
         public string pass {  get; set; }
         public string confirmPass {  get; set; }
 
+        // Default BirthDate
         public Account()
         {
             BirthDate = DateTime.Now;

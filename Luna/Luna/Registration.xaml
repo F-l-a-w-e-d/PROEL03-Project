@@ -43,7 +43,7 @@ HorizontalOptions="Start" TextColor="White" />
             <Label Text="Birth Date" FontSize="18"
 HorizontalOptions="Start" TextColor="White" />
             <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
-            <Entry x:Name="ageEntry" Text="{Binding acc.BirthDate}" Placeholder="Age" FontSize="16" TextColor="Black" Keyboard="Date"/>
+            <DatePicker x:Name="ageEntry" Date="{Binding acc.BirthDate}" FontSize="16" TextColor="Black"/>
         </Frame>
 
             <Label Text="Address" FontSize="18"
@@ -55,13 +55,13 @@ HorizontalOptions="Start" TextColor="White" />
             <Label Text="Contact No" FontSize="18"
 HorizontalOptions="Start" TextColor="White" />
             <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
-            <Entry x:Name="contactnumberEntry" Text="{Binding acc.contactNo}" Placeholder="Contact Number" FontSize="16" TextColor="Black" Keyboard="Text"/>
+            <Entry x:Name="contactnumberEntry" Text="{Binding acc.contactNo}" Placeholder="Contact Number" FontSize="16" TextColor="Black" Keyboard="Numeric"/>
         </Frame>
 
-            <Label Text="Email" FontSize="18"
+            <Label Text="Email (Username)" FontSize="18"
 HorizontalOptions="Start" TextColor="White" />
             <Frame Padding="8" CornerRadius="10" BackgroundColor="White" HasShadow="True">
-            <Entry x:Name="emailEntry" Text="{Binding acc.user}" Placeholder="Email" Keyboard="Email" FontSize="16" TextColor="Black"/>
+            <Entry x:Name="emailEntry" Text="{Binding acc.user}" Placeholder="Username" Keyboard="Email" FontSize="16" TextColor="Black"/>
         </Frame>
 
             <Label Text="Password" FontSize="18"

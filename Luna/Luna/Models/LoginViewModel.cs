@@ -70,7 +70,7 @@ namespace Luna.Models
             }
 
             // CONTACTNO - Consists text
-            if (!long.TryParse(acc.contactNo, out _) || acc.contactNo.Length < 11)
+            if (!long.TryParse(acc.contactNo, out _) || acc.contactNo.Length != 11)
             {
                 await Application.Current.MainPage.DisplayAlert("Register", "Please enter a valid contact number.", "OK");
                 return;
@@ -89,7 +89,7 @@ namespace Luna.Models
                 await Application.Current.MainPage.DisplayAlert("Register", "Password must contain 8 letters!", "OK");
                 return;
             }
-
+            
             // PASSWORD - Matching confirm pass
             if (acc.pass != acc.confirmPass)
             {
