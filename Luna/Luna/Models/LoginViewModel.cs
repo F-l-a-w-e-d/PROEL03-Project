@@ -145,6 +145,7 @@ namespace Luna.Models
             // success
             await Application.Current.MainPage.DisplayAlert("Login", "Successfully logged in! Welcome " + account.Lname, "OK");
 
+            Preferences.Set("currentUser", account.AccountId);
             Application.Current.MainPage = App.Services.GetRequiredService<Home>();
         }
     }

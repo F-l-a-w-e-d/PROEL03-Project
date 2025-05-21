@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Luna.NewPost"
-             BackgroundColor="{StaticResource BackgroundColor}"
-             NavigationPage.HasNavigationBar="False">
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Luna.NewPost"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="False">
 
-    <!-- Reuse the same color palette -->
     <ContentPage.Resources>
         <ResourceDictionary>
+            <!-- Color Palette -->
             <Color x:Key="PrimaryColor">#2C2C54</Color>
             <Color x:Key="BackgroundColor">#121212</Color>
             <Color x:Key="TextColor">#FFFFFF</Color>
@@ -15,93 +16,92 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <Grid RowDefinitions="Auto, *">
+    <Grid RowDefinitions="Auto, *, Auto">
+
         <!-- HEADER BAR -->
         <Grid
       Grid.Row="0"
       BackgroundColor="{StaticResource PrimaryColor}"
-      Padding="12,8"
+      Padding="16"
       ColumnDefinitions="Auto, *">
 
-            <!-- Back Button -->
-            <ImageButton
-        Source="icon_back.png"
-        WidthRequest="24"
-        HeightRequest="24"
-        BackgroundColor="Transparent"
-        Command="{Binding GoBackCommand}" />
-
-            <!-- Title -->
             <Label
         Grid.Column="1"
         Text="New Post"
-        FontSize="20"
+        FontSize="22"
         FontAttributes="Bold"
         TextColor="{StaticResource TextColor}"
         VerticalOptions="Center"
         HorizontalOptions="Center" />
         </Grid>
 
-        <!-- CONTENT FORM -->
+        <!-- BODY: editor inside a card with Android‑only shadow -->
         <ScrollView Grid.Row="1">
-            <StackLayout
-        Padding="16"
-        Spacing="16">
-
-                <!-- Post Text -->
+            <VerticalStackLayout Padding="24" Spacing="16">
                 <Frame
           BackgroundColor="{StaticResource CardBackground}"
-          CornerRadius="10"
-          HasShadow="False">
+          CornerRadius="12"
+          Padding="12">
+                    <!-- Define the shadow that will show on Android -->
+                    <Frame.Shadow>
+                        <Shadow
+              Brush="{StaticResource PrimaryColor}"
+              Offset="0,8"
+              Radius="10"
+              Opacity="0.2" />
+                    </Frame.Shadow>
+
                     <Editor
-            x:Name="PostEditor"
-            Text="{Binding NewPostContent}"
-            Placeholder="What's on your mind?"
-            PlaceholderColor="{StaticResource TextColor}"
-            TextColor="{StaticResource TextColor}"
-            AutoSize="TextChanges"
-            BackgroundColor="Transparent" />
+                x:Name="PostEditor"
+                Text="{Binding post.Content}"
+                Placeholder="What's on your mind?"
+                PlaceholderColor="{StaticResource TextColor}"
+                TextColor="{StaticResource TextColor}"
+                AutoSize="TextChanges"
+                BackgroundColor="Transparent"
+                FontSize="16" />
                 </Frame>
-
-                <!-- Image Preview + Picker -->
-                <Grid RowDefinitions="Auto, Auto" ColumnDefinitions="*, Auto">
-
-                    <Image
-            Source="{Binding SelectedImage}"
-            Aspect="AspectFill"
-            HeightRequest="200"
-            IsVisible="{Binding IsImageSelected}" />
-
-                    <Button
-            Grid.Row="1"
-            Grid.Column="0"
-            Text="Add Image"
-            Command="{Binding PickImageCommand}"
-            BackgroundColor="{StaticResource PrimaryColor}"
-            TextColor="{StaticResource TextColor}"
-            CornerRadius="25"
-            HeightRequest="50" />
-
-                    <Button
-            Grid.Row="1"
-            Grid.Column="1"
-            Text="Remove"
-            Command="{Binding RemoveImageCommand}"
-            IsVisible="{Binding IsImageSelected}"
-            BackgroundColor="Transparent"
-            TextColor="{StaticResource TextColor}" />
-                </Grid>
-
-                <!-- Submit Button -->
-                <Button
-          Text="Post"
-          Command="{Binding SubmitPostCommand}"
-          BackgroundColor="{StaticResource PrimaryColor}"
-          TextColor="{StaticResource TextColor}"
-          CornerRadius="25"
-          HeightRequest="50" />
-
-            </StackLayout>
+            </VerticalStackLayout>
         </ScrollView>
+
+        <!-- FOOTER: Back + Spacer + Post -->
+        <Grid
+  Grid.Row="2"
+  Padding="16"
+  ColumnDefinitions="Auto, *, Auto"
+  BackgroundColor="{StaticResource BackgroundColor}"
+  HorizontalOptions="FillAndExpand">
+            <!-- make the grid stretch -->
+
+            <!-- 1) Back Button in Column 0 -->
+            <ImageButton
+    Grid.Column="0"
+    Source="icon_back.png"
+    Command="{Binding GobackCommand}"
+    WidthRequest="40"
+    HeightRequest="40"
+    BackgroundColor="Transparent"
+    VerticalOptions="Center" />
+
+            <!-- 2) Spacer in Column 1 -->
+            <BoxView
+    Grid.Column="1"
+    Color="Transparent"
+    HorizontalOptions="FillAndExpand" />
+
+            <!-- 3) Post Button in Column 2 -->
+            <Button
+    Grid.Column="2"
+    Text="Post"
+    Command="{Binding PostCommand}"
+    CommandParameter="{Binding post}"
+    BackgroundColor="{StaticResource PrimaryColor}"
+    TextColor="{StaticResource TextColor}"
+    CornerRadius="25"
+    HeightRequest="50"
+    WidthRequest="260"
+    VerticalOptions="Center" />
+        </Grid>
+
     </Grid>
 </ContentPage>

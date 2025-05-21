@@ -4,7 +4,6 @@
              x:Class="Luna.Home"
              BackgroundColor="{StaticResource BackgroundColor}"
              NavigationPage.HasNavigationBar="false">
-    <!-- Define your color palette -->
     <ContentPage.Resources>
         <ResourceDictionary>
             <!-- Primary accent -->
@@ -19,147 +18,114 @@
     </ContentPage.Resources>
 
     <Grid>
-        <!-- Rows: Header, Feed, Bottom Nav -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="*" />
-            <RowDefinition Height="Auto" />
-        </Grid.RowDefinitions>
 
-        <!-- HEADER -->
-        <Grid Grid.Row="0"
-              BackgroundColor="{StaticResource PrimaryColor}"
-              Padding="12,8">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Label Text="News Feed"
-                   FontSize="20"
-                   FontAttributes="Bold"
-                   TextColor="{StaticResource TextColor}"
-                   VerticalOptions="Center" />
-            <ImageButton Grid.Column="2"
-                         Source="icon_message.png"
-                         WidthRequest="18"
-                         HeightRequest="18"
-                         BackgroundColor="Transparent" />
-        </Grid>
+        <!-- Top Bar -->
+        <StackLayout Orientation="Horizontal" Padding="10" BackgroundColor="#2C3E50">
+            <Label Text="News Feed" TextColor="White" FontAttributes="Bold" FontSize="20" Padding="10" />
+        </StackLayout>
 
-        <!-- FEED -->
-        <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Posts}"
-                        Margin="0,8"
-                        BackgroundColor="{StaticResource BackgroundColor}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <!-- Individual Post Card -->
-                    <Frame CornerRadius="10"
-                           Padding="10"
-                           Margin="12,6"
-                           BackgroundColor="{StaticResource CardBackground}"
-                           HasShadow="False">
-                        <StackLayout Spacing="8">
-                            <!-- Post Header -->
-                            <Grid ColumnDefinitions="Auto,*,Auto">
-                                <Image Source="{Binding ProfileImage}"
-                                       WidthRequest="40"
-                                       HeightRequest="40"
-                                       Aspect="AspectFill"
-                                       VerticalOptions="Center" />
-                                <Label Grid.Column="1"
-                                       Text="{Binding UserName}"
-                                       TextColor="{StaticResource TextColor}"
-                                       FontAttributes="Bold"
-                                       VerticalOptions="Center"
-                                       Margin="10,0" />
-                                <Label Grid.Column="2"
-                                       Text="{Binding TimePosted}"
-                                       TextColor="{StaticResource TextColor}"
-                                       FontSize="12"
-                                       VerticalOptions="Center" />
-                            </Grid>
+        <VerticalStackLayout Padding="20" Spacing="10" BackgroundColor="#121212">
 
-                            <!-- Post Content -->
-                            <Label Text="{Binding Content}"
-                                   TextColor="{StaticResource TextColor}"
-                                   LineBreakMode="WordWrap" />
+            <!-- Header with "News Feed" and Refresh Button -->
+            <Grid ColumnDefinitions="*,Auto" VerticalOptions="Center">
+                <Label Text="News Feed"
+               TextColor="White"
+               FontAttributes="Bold"
+               FontSize="20"
+               VerticalOptions="Center"
+               Grid.Column="0" />
 
-                            <!-- Reaction & Comments Bar -->
-                            <StackLayout Orientation="Horizontal"
-                                         Spacing="24"
-                                         Padding="0,8,0,0">
-                                <!-- Like -->
-                                <StackLayout Orientation="Horizontal"
-                                             Spacing="4">
-                                    <ImageButton Source="icon_heart_outline.png"
-                                                 WidthRequest="12"
-                                                 HeightRequest="12"
-                                                 BackgroundColor="Transparent"
-                                                 />
-                                    <Label Text="{Binding LikesCount}"
-                                           TextColor="{StaticResource TextColor}"
-                                           VerticalOptions="Center"
-                                           FontSize="14" />
-                                </StackLayout>
-                                <!-- Comment -->
-                                <StackLayout Orientation="Horizontal"
-                                             Spacing="4">
-                                    <ImageButton Source="icon_comment.png"
-                                                 WidthRequest="12"
-                                                 HeightRequest="12"
-                                                 BackgroundColor="Transparent"
-                                                 />
-                                    <Label Text="{Binding CommentsCount}"
-                                           TextColor="{StaticResource TextColor}"
-                                           VerticalOptions="Center"
-                                           FontSize="14" />
-                                </StackLayout>
-                            </StackLayout>
-                        </StackLayout>
-                    </Frame>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                <Button Text="Refresh"
+                Command="{Binding refresh}"
+                FontSize="14"
+                BackgroundColor="Transparent"
+                TextColor="White"
+                Padding="10,5"
+                Grid.Column="1"
+                VerticalOptions="Center"
+                HorizontalOptions="End" />
+            </Grid>
 
-        <!-- BOTTOM NAVIGATION -->
-        <Grid Grid.Row="2"
-              BackgroundColor="{StaticResource PrimaryColor}"
-              Padding="8,6">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+            <!-- News Feed Content -->
+            <CollectionView ItemsSource="{Binding Posts}"
+                    BackgroundColor="Transparent"
+                    Margin="0,10,0,0">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame BackgroundColor="#1E1E1E"
+                       CornerRadius="12"
+                       Padding="16"
+                       Margin="0,6"
+                       HasShadow="True">
+                            <VerticalStackLayout Spacing="8">
+                                <Label Text="{Binding Account.fullName}"
+                               TextColor="White"
+                               FontAttributes="Bold"
+                               FontSize="16" />
+                                <Label Text="{Binding TimePosted}"
+                               FontSize="12"
+                               TextColor="Gray" />
+                                <Label Text="{Binding Content}"
+                               TextColor="White"
+                               FontSize="14"
+                               LineBreakMode="WordWrap" />
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+
+        <StackLayout VerticalOptions="End" HorizontalOptions="Center" Margin="0,0,0,70">
+            <Button Text="Post" TextColor="Black" BackgroundColor="White"
+                    Command="{Binding createPost}"
+                    WidthRequest="100" HeightRequest="50" CornerRadius="25"/>
+        </StackLayout>
+
+        <!-- Bottom Navigation with Profile in the Middle -->
+        <Grid VerticalOptions="End"
+      BackgroundColor="#2C3E50"
+      HeightRequest="60"
+      ColumnDefinitions="Auto,*,*,*"
+      Padding="10,0">
+
+            <!-- Refresh Button (Column 0) -->
             <Button Grid.Column="0"
-                    Text="Feed"
-                    BackgroundColor="Transparent"
-                    TextColor="{StaticResource TextColor}" />
+            Text="⟳"
+            Command="{Binding refresh}"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Start"
+            VerticalOptions="Center"
+            FontSize="30"
+            TextColor="White"
+            Padding="0" />
+
+            <!-- Home Button (Column 1) -->
             <Button Grid.Column="1"
-                    Text="Profile"
-                    BackgroundColor="Transparent"
-                    TextColor="{StaticResource TextColor}" />
-            <Button x:Name="NewPost"
-                    Grid.Column="2"
-                    Text="Post"
-                    WidthRequest="60"
-                    HeightRequest="50"
-                    CornerRadius="25"
-                    Clicked="NewPost_Clicked"
-                    BackgroundColor="{StaticResource TextColor}"
-                    TextColor="{StaticResource PrimaryColor}"
-                    VerticalOptions="Center" />
+            Text="Home"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="White" />
+
+            <!-- Profile Button (Column 2) -->
+            <Button Grid.Column="2"
+            Text="Profile"
+            Command="{Binding gotoProfile}"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="White" />
+
+            <!-- Logout Button (Column 3) -->
             <Button Grid.Column="3"
-                    Text="Alerts"
-                    BackgroundColor="Transparent"
-                    TextColor="{StaticResource TextColor}" />
-            <Button Grid.Column="4"
-                    Text="Logout"
-                    BackgroundColor="Transparent"
-                    TextColor="{StaticResource TextColor}" />
+            Text="Logout"
+            Command="{Binding Logout}"
+            BackgroundColor="Transparent"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            TextColor="White" />
         </Grid>
     </Grid>
 </ContentPage>

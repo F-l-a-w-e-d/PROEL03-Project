@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Luna.Profile"
+    x:Name="ProfilePage"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Reuse your palette -->
+            <Color x:Key="PrimaryColor">#2C2C54</Color>
+            <Color x:Key="BackgroundColor">#121212</Color>
+            <Color x:Key="TextColor">#FFFFFF</Color>
+            <Color x:Key="CardBackground">#1E1E1E</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    
+    <ScrollView>
+        <VerticalStackLayout Padding="24" Spacing="24">
+            <HorizontalStackLayout>
+                <Button
+                Text="← Back"
+                BackgroundColor="Transparent"
+                Command="{Binding gotoHome}"
+                TextColor="{StaticResource TextColor}"
+                FontSize="16"
+                HorizontalOptions="Start"
+                Padding="0" />
+
+                <Button
+        Text="Refresh"
+        BackgroundColor="Transparent"
+        Command="{Binding refresh}"
+        TextColor="{StaticResource TextColor}"
+        FontSize="16"
+        HorizontalOptions="EndAndExpand"
+        Padding="30,0" />
+            </HorizontalStackLayout>
+
+            <!-- Profile Header -->
+            <Frame
+        BackgroundColor="{StaticResource CardBackground}"
+        CornerRadius="100"
+        HeightRequest="120"
+        WidthRequest="120"
+        HorizontalOptions="Center"
+        HasShadow="False">
+                <Image
+          Source="userimage.png"
+          Aspect="AspectFill"
+          Clip="EllipseGeometry Center=60,60 RadiusX=60 RadiusY=60" />
+            </Frame>
+
+            <Label
+        Text="{Binding account.fullName}"
+        FontSize="24"
+        FontAttributes="Bold"
+        TextColor="{StaticResource TextColor}"
+        HorizontalOptions="Center" />
+
+            <!-- Stats Row -->
+            <Grid ColumnDefinitions="*,Auto,Auto,Auto,*" VerticalOptions="Center">
+                <BoxView Grid.Column="0" Color="Transparent" />
+                <Label
+          Grid.Column="1"
+          Text="Posts"
+          FontSize="14"
+          TextColor="{StaticResource TextColor}"
+          VerticalOptions="Center" />
+                <Label
+          Grid.Column="2"
+          Text="{Binding PostCount}"
+          FontSize="18"
+          FontAttributes="Bold"
+          TextColor="White"
+          VerticalOptions="Center"
+          Margin="6,0" />
+                <BoxView Grid.Column="3" WidthRequest="1" HeightRequest="20" Color="{StaticResource TextColor}" Opacity="0.2" VerticalOptions="Center" Margin="12,0" />
+                <BoxView Grid.Column="4" Color="Transparent" />
+            </Grid>
+
+            <!-- “Posts” Section Label -->
+            <Label
+        Text="Posts"
+        FontSize="18"
+        FontAttributes="Bold"
+        TextColor="{StaticResource TextColor}" />
+
+            <!-- Posts List -->
+            <CollectionView
+        ItemsSource="{Binding posts}"
+        SelectionMode="None"
+        BackgroundColor="Transparent">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame
+              BackgroundColor="{StaticResource CardBackground}"
+              CornerRadius="12"
+              HasShadow="True"
+              Padding="16"
+              Margin="0,8">
+
+                            <VerticalStackLayout Spacing="20">
+                                <!-- Post Header -->
+                                <Grid ColumnDefinitions="Auto,*,Auto">
+                                    <Label
+                    Text="{Binding Account.fullName}"
+                    FontAttributes="Bold"
+                    TextColor="White" />
+                                    <Label
+                    Grid.Column="1"
+                    Text="{Binding TimePosted}"
+                    FontSize="12"
+                    TextColor="{StaticResource TextColor}"
+                    HorizontalOptions="End" />
+                                </Grid>
+
+                                <!-- Post Content -->
+                                <Label
+                  Text="{Binding Content}"
+                  LineBreakMode="WordWrap"
+                  FontSize="18"
+                  TextColor="{StaticResource TextColor}" />
+
+                                <!-- Update / Delete Buttons -->
+                                <HorizontalStackLayout Spacing="24" HorizontalOptions="End">
+                                    <Button
+                    Text="Update"
+                    Command="{Binding BindingContext.updateCommand, Source={x:Reference ProfilePage}}"
+                    CommandParameter="{Binding .}"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource TextColor}"
+                    CornerRadius="10"
+                    FontSize="10.5"
+                    Padding="15,4" />
+
+                                    <Button
+                    Text="Delete"
+                    Command="{Binding BindingContext.deleteCommand, Source={x:Reference ProfilePage}}"
+                    CommandParameter="{Binding .}"
+                    BackgroundColor="{StaticResource PrimaryColor}"
+                    TextColor="{StaticResource TextColor}"
+                    CornerRadius="10"
+                    FontSize="10.5"
+                    Padding="15,4" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

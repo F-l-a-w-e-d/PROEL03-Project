@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Luna.EditPage"
+    BackgroundColor="{StaticResource BackgroundColor}"
+    NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="PrimaryColor">#2C2C54</Color>
+            <Color x:Key="BackgroundColor">#121212</Color>
+            <Color x:Key="TextColor">#FFFFFF</Color>
+            <Color x:Key="CardBackground">#1E1E1E</Color>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="16">
+        <!-- Header -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto, *, Auto" Padding="0,8">
+            <Label
+        Grid.Column="1"
+        Text="Edit Post"
+        FontSize="20"
+        FontAttributes="Bold"
+        TextColor="{StaticResource TextColor}"
+        VerticalOptions="Center"
+        HorizontalOptions="Center" />
+        </Grid>
+
+        <!-- Editor -->
+        <Frame
+      Grid.Row="1"
+      BackgroundColor="{StaticResource CardBackground}"
+      CornerRadius="12"
+      HasShadow="True"
+      Padding="12"
+      Margin="0,16">
+            <Editor
+        Text="{Binding Post.Content}"
+        AutoSize="TextChanges"
+        FontSize="16"
+        TextColor="{StaticResource TextColor}"
+        BackgroundColor="Transparent"
+        Placeholder="Update your post here..."
+        PlaceholderColor="{StaticResource TextColor}" />
+        </Frame>
+
+        <!-- Footer Buttons -->
+        <HorizontalStackLayout
+      Grid.Row="2"
+      Spacing="16"
+      HorizontalOptions="Center"
+      Padding="0,8">
+
+            <Button
+        Text="Save"
+        Command="{Binding SaveCommand}"
+        BackgroundColor="{StaticResource PrimaryColor}"
+        TextColor="{StaticResource TextColor}"
+        CornerRadius="25"
+        WidthRequest="120"
+        HeightRequest="48" />
+
+            <Button
+        Text="Cancel"
+        Command="{Binding CancelCommand}"
+        BackgroundColor="{StaticResource PrimaryColor}"
+        TextColor="{StaticResource TextColor}"
+        CornerRadius="25"
+        WidthRequest="120"
+        HeightRequest="48" />
+        </HorizontalStackLayout>
+    </Grid>
+</ContentPage>
