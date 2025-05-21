@@ -11,10 +11,4 @@ public partial class Home : ContentPage
 
 		BindingContext = new HomeViewModel();
 	}
-
-	// Go to creating of post -- CHANGE
-    private async void NewPost_Clicked(object sender, EventArgs e)
-    {
-		await Navigation.PushAsync(new NewPost());
-	}
 }

@@ -10,8 +10,9 @@
         {
             InitializeComponent();
             Services = serviceProvider;
-            // changed to navigatio page and to splashScreen
+            // changed to navigation page and to splashScreen
             MainPage = new NavigationPage(new splashScreen());
+            //MainPage = new Profile();
         }
     }
 }

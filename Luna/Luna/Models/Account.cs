@@ -13,6 +13,7 @@ namespace Luna.Models
         public string Lname { get; set; }
         public string Mname {  get; set; }
         public string Fname {  get; set; }
+        public string fullName => $"{Fname} {Mname} {Lname}";
         public string address {  get; set; }
         public DateTime BirthDate { get; set; }
         public string contactNo {  get; set; }

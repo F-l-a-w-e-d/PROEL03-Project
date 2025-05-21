@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -47,6 +48,32 @@ namespace Luna.Models
             var data = JsonSerializer.Deserialize<List<T>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true});
 
             return data;
+        }
+
+        // deletion of data on a specific table
+        public static async Task<bool> deleteData(string id, string tableName)
+        {
+            string url = $"{baseURL}{tableName}/{id}";
+            var response = await _httpClient.DeleteAsync(url);
+            return response.IsSuccessStatusCode;
+        }
+
+        // update a specific data
+        public static async Task<bool> updateData<T>(T obj, string tableName, string id) where T : class
+        {
+            try
+            {
+                string json = JsonSerializer.Serialize(obj);
+                var content = new StringContent(json, Encoding.UTF8, "application/json");
+
+                var response = await _httpClient.PutAsync($"{baseURL}/{tableName}/{id}", content);
+                return response.IsSuccessStatusCode;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[Update Error] {ex.Message}");
+                return false;
+            }
         }
     }
 }

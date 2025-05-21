@@ -1,3 +1,5 @@
+using Luna.Models;
+
 namespace Luna;
 
 public partial class NewPost : ContentPage
@@ -6,5 +8,8 @@ public partial class NewPost : ContentPage
 	public NewPost()
 	{
 		InitializeComponent();
+
+		// add binding context
+		BindingContext = new PostViewModel();
 	}
 }

@@ -9,8 +9,11 @@ namespace Luna.Models
     class Post
     {
         // For the newsfeed
-        public string UserName { get; set; }
+        public string PostId { get; set; }
+        public string AccountId { get; set; }
+        public Account Account { get; set; }
         public DateTime TimePosted { get; set; }
         public string Content { get; set; }
+        public bool isDeleted { get; set; }
     }
 }
